@@ -140,9 +140,9 @@ void Style::initWidStyle()
     if(QApplication::primaryScreen()->geometry().width()==800 &&
             QApplication::primaryScreen()->geometry().height()==600)
     {
-        minw=320;
-        minh=500;
-        defaultMainViewWidWidth=264;
+        minw=1920;
+        minh=1080;
+        defaultMainViewWidWidth=290;
         defaultTopWidHeight=54;
         defaultQueryLineEditWidth=245;
         defaultQueryLineEditHeight=30;
@@ -151,9 +151,9 @@ void Style::initWidStyle()
     }
     else
     {
-        minw=376;
-        minh=590;
-        defaultMainViewWidWidth=320;
+        minw=1920;
+        minh=1080;
+        defaultMainViewWidWidth=290;
         defaultTopWidHeight=54;
         defaultQueryLineEditWidth=288;
         defaultQueryLineEditHeight=30;

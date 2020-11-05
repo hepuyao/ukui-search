@@ -46,7 +46,7 @@ void FullSearchResultWidget::initUi()
     m_spaceItem=new QSpacerItem(40,20,QSizePolicy::Expanding,QSizePolicy::Fixed);
     mainLayout->addItem(m_spaceItem);
     m_listView=new FullListView(this,3);
-    m_listView->setFixedSize(this->width()-Style::LeftWidWidth,this->height());
+    m_listView->setFixedSize(this->width(),this->height());
     mainLayout->addWidget(m_listView);
     this->setLayout(mainLayout);
 
@@ -81,12 +81,12 @@ void FullSearchResultWidget::repaintWidget()
 {
     this->setFixedSize(Style::MainViewWidWidth,
                        Style::AppListWidHeight);
-    this->layout()->setContentsMargins(Style::LeftWidWidth,0,0,0);
+    this->layout()->setContentsMargins(0,0,0,0);
     this->layout()->removeWidget(m_listView);
     m_listView->setParent(nullptr);
     delete m_listView;
     m_listView=new FullListView(this,3);
-    m_listView->setFixedSize(this->width()-Style::LeftWidWidth,this->height());
+    m_listView->setFixedSize(this->width(),this->height());
     QHBoxLayout *mainLayout=qobject_cast<QHBoxLayout*>(this->layout());
     mainLayout->insertWidget(1,m_listView);
     m_data.clear();

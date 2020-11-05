@@ -81,5 +81,8 @@
         <file>data/img/mainviewwidget/Mobile-Disabled.svg</file>
         <file>data/img/mainviewwidget/Mobile-Enabled.svg</file>
         <file>data/img/mainviewwidget/Mobile-Normal.svg</file>
+        <file>tests/assets/search.xml</file>
+        <file>tests/assets/search.conf</file>
+        <file>data/img/mainviewwidget/search.png</file>
     </qresource>
 </RCC>

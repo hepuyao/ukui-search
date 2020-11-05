@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg dbus x11extras KWindowSystem
+QT       += core gui svg dbus x11extras KWindowSystem xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 include(src/QtSingleApplication/qtsingleapplication.pri)
@@ -75,7 +75,8 @@ SOURCES += \
     src/Interface/ukuimenuinterface.cpp \
     main.cpp \
     src/UtilityFunction/utility.cpp \
-    src/XEventMonitor/xeventmonitor.cpp
+    src/XEventMonitor/xeventmonitor.cpp \
+    tests/settingmodel.cpp
 
 HEADERS  += \
     src/CommonUseWidget/commonusewidget.h \
@@ -107,7 +108,8 @@ HEADERS  += \
     src/Interface/ukuichineseletter.h \
     src/Interface/ukuimenuinterface.h \
     src/UtilityFunction/utility.h \
-    src/XEventMonitor/xeventmonitor.h
+    src/XEventMonitor/xeventmonitor.h \
+    tests/settingmodel.h
 
 RESOURCES += \
     res.qrc

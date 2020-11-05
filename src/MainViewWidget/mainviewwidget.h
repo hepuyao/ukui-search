@@ -42,6 +42,8 @@
 #include "src/SearchResultWidget/searchappthread.h"
 #include "directorychangedthread.h"
 #include "src/Style/style.h"
+#include <QTreeView>
+#include "tests/settingmodel.h"
 
 class MainViewWidget : public QWidget
 {
@@ -120,6 +122,11 @@ private:
 
     QSettings *m_setting=nullptr;
     QGSettings *m_gsetting=nullptr;
+
+    QTreeView  *fileView;
+    QTreeView  *settingView;
+
+    settingModel *settingmodel;
 
 protected:
     /**

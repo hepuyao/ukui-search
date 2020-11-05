@@ -42,7 +42,7 @@ ListView::~ListView()
 
 void ListView::initWidget()
 {
-//    this->setFixedSize(w,h);
+    this->setFixedSize(w,h);
 
     this->verticalScrollBar()->setStyleSheet("QScrollBar{padding-top:0px;padding-bottom:0px;background:transparent;width:3px;border-radius:1.5px;}"
                                              "QScrollBar::handle{background-color:rgba(255,255,255,0.25); width:3px;border-radius:1.5px;}"
@@ -51,6 +51,7 @@ void ListView::initWidget()
                                              "QScrollBar::sub-line{background-color:transparent;height:0px;width:0px;}"
                                              "QScrollBar::add-line{background-color:transparent;height:0px;width:0px;}"
                                              );
+
     this->setSelectionMode(QAbstractItemView::SingleSelection);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
