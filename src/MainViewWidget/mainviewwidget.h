@@ -44,6 +44,7 @@
 #include "src/Style/style.h"
 #include <QTreeView>
 #include "tests/settingmodel.h"
+#include "tests/filemodel.h"
 
 class MainViewWidget : public QWidget
 {
@@ -127,6 +128,7 @@ private:
     QTreeView  *settingView;
 
     settingModel *settingmodel;
+    filemodel *m_filemodel;
 
 protected:
     /**

@@ -30,6 +30,7 @@ MainViewWidget::MainViewWidget(QWidget *parent) :
     fileView = new QTreeView(this);//文档搜索treeview
     settingView  = new QTreeView(this);//控制面板搜索treeview
     settingmodel= new settingModel;
+    m_filemodel = new filemodel;
     initUi();
 }
 
@@ -180,10 +181,20 @@ void MainViewWidget::initQueryLineEdit()
 
     });
 
-    connect(settingView,&QTreeView::clicked,this,[=](){
-        settingmodel->run(settingView->currentIndex().row());
+    connect(m_queryLineEdit,&QLineEdit::textChanged,m_filemodel,[=](const QString &search){
+                m_filemodel->matchstart(search);
+           qDebug()<<"ok";
     });
 
+
+    connect(settingView,&QTreeView::clicked,this,[=](){
+        settingmodel->run(settingView->currentIndex().row());
+
+    });
+
+    connect(fileView,&QTreeView::clicked,this,[=](){
+        m_filemodel->run(fileView->currentIndex().row());
+    });
 
 }
 
@@ -330,6 +341,8 @@ void MainViewWidget::loadMinMainView()
 
 
     settingView->setModel(settingmodel);
+     fileView->setModel(m_filemodel);
+
 
     fileView->setStyleSheet("color:black;"
                                " background-color : white;"

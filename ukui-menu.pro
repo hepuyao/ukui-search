@@ -76,6 +76,7 @@ SOURCES += \
     main.cpp \
     src/UtilityFunction/utility.cpp \
     src/XEventMonitor/xeventmonitor.cpp \
+    tests/filemodel.cpp \
     tests/settingmodel.cpp
 
 HEADERS  += \
@@ -109,6 +110,7 @@ HEADERS  += \
     src/Interface/ukuimenuinterface.h \
     src/UtilityFunction/utility.h \
     src/XEventMonitor/xeventmonitor.h \
+    tests/filemodel.h \
     tests/settingmodel.h
 
 RESOURCES += \
