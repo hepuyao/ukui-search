@@ -35,6 +35,7 @@
 #include "src/SearchResultWidget/searchappthread.h"
 #include "src/Style/style.h"
 #include "../SearchFile/filemodel.h"
+#include "../SearchFile/searchfilethread.h"
 #include "../SearchSetting/settingmodel.h"
 #include <QTreeView>
 
@@ -74,6 +75,7 @@ private:
 
     SearchResultWidget *m_searchResultWid=nullptr;
     SearchAppThread *m_searchAppThread=nullptr;
+    SearchFileThread *m_searchFileThread=nullptr;
 
     int m_widgetState=1;//Classification window number
     int m_saveCurrentWidState=-1;//Store the current category window number
@@ -140,6 +142,7 @@ public Q_SLOTS:
      * @param arg: Search results
      */
     void recvSearchResult(QVector<QStringList> arg);
+    void recvFileSearchResult(QStringList arg);
 
     void setFileView(int row); //改变文件view大小的槽函数
 

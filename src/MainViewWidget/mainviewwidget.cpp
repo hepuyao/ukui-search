@@ -105,25 +105,25 @@ void MainViewWidget::initUi()
 void MainViewWidget::changesize()
 {
 
-    if(fileNum==0)
-    {
-        m_fileview->setVisible(false);
-    } else {
-        if(fileNum>10){
-            m_fileview->setVisible(true);
-            m_fileview->setFixedSize(Style::defaultMainViewWidWidth,5*60);
-        } else {
-            m_fileview->setVisible(true);
-            m_fileview->setFixedSize(Style::defaultMainViewWidWidth,fileNum);
-        }
-    }
+//    if(fileNum==0)
+//    {
+//        m_fileview->setVisible(false);
+//    } else {
+//        if(fileNum>10){
+//            m_fileview->setVisible(true);
+//            m_fileview->setFixedSize(Style::defaultMainViewWidWidth,5*60);
+//        } else {
+//            m_fileview->setVisible(true);
+//            m_fileview->setFixedSize(Style::defaultMainViewWidWidth,fileNum);
+//        }
+//    }
 
-    if(SettingNum==0){
-        m_settingview->setVisible(false);
-    }else{
-        m_settingview->setVisible(true);
-         m_settingview->setFixedSize(Style::defaultMainViewWidWidth,SettingNum*60);
-    }
+//    if(SettingNum==0){
+//        m_settingview->setVisible(false);
+//    }else{
+//        m_settingview->setVisible(true);
+//         m_settingview->setFixedSize(Style::defaultMainViewWidWidth,SettingNum*60);
+//    }
 
 }
 
@@ -184,8 +184,16 @@ void MainViewWidget::initQueryLineEdit()
 
     //跑一个线程执行应用搜索
     m_searchAppThread=new SearchAppThread;
+    m_searchFileThread=new SearchFileThread;
+    connect(this,&MainViewWidget::sendSearchKeyword,
+            m_searchFileThread,&SearchFileThread::recvSearchKeyword);
+
     connect(this,&MainViewWidget::sendSearchKeyword,
             m_searchAppThread,&SearchAppThread::recvSearchKeyword);
+
+    connect(m_searchFileThread,&SearchFileThread::sendSearchResult,
+            this,&MainViewWidget::recvFileSearchResult);
+
     connect(m_searchAppThread,&SearchAppThread::sendSearchResult,
             this,&MainViewWidget::recvSearchResult);
     connect(m_queryLineEdit, &QLineEdit::textChanged, this, &MainViewWidget::searchAppSlot);
@@ -202,7 +210,7 @@ void MainViewWidget::initQueryLineEdit()
 //        QString search = QString::fromLocal8Bit(QString("使用百度搜索 1%2%3%").arg(QString::fromLocal8Bit("")).arg(input->text().arg(QString::fromLocal8Bit(""))));
         search_web_page->setText(search);
         search1=m_queryLineEdit->text();
-        qDebug()<<"search"<<search;
+
         //根据判断来隐藏与显示网页搜索
         if(search1 != QString::fromLocal8Bit("")){
             search_web_page->setVisible(true);
@@ -296,12 +304,19 @@ void MainViewWidget::searchAppSlot(QString arg)
 {
     Q_EMIT sendSearchKeyword(arg);
     m_searchAppThread->start();
+    m_searchFileThread->start();
 }
 
 void MainViewWidget::recvSearchResult(QVector<QStringList> arg)
 {
     m_searchAppThread->quit();
     m_searchResultWid->updateAppListView(arg);
+}
+
+void MainViewWidget::recvFileSearchResult(QStringList arg)
+{
+    m_searchFileThread->quit();
+    m_filemodel->showResult(arg);
 }
 
 /*
@@ -362,8 +377,8 @@ void MainViewWidget::loadMinMainView()
 void MainViewWidget::initSearchWidget()
 {
     //初始化文件与设置view为隐藏
-    m_fileview->setVisible(false);
-    m_settingview->setVisible(false);
+//    m_fileview->setVisible(false);
+//    m_settingview->setVisible(false);
 
     m_filemodel = new filemodel;
     m_settingmodel = new settingModel;

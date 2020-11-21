@@ -68,7 +68,9 @@ SOURCES += \
     src/UtilityFunction/utility.cpp \
     src/XEventMonitor/xeventmonitor.cpp \
     src/SearchFile/file-utils.cpp\
-    src/SearchFile/gobject-template.cpp
+    src/SearchFile/gobject-template.cpp\
+    src/SearchFile/searchfilethread.cpp\
+    src/SearchFile/filesearch.cpp
 
 
 HEADERS  += \
@@ -94,7 +96,9 @@ HEADERS  += \
     src/UtilityFunction/utility.h \
     src/XEventMonitor/xeventmonitor.h\
     src/SearchFile/file-utils.h\
-    src/SearchFile/gobject-template.h
+    src/SearchFile/gobject-template.h\
+    src/SearchFile/searchfilethread.h\
+    src/SearchFile/filesearch.h
 
 RESOURCES += \
     res.qrc

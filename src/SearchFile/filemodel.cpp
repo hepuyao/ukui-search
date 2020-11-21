@@ -3,17 +3,11 @@
 #include <pwd.h>
 #include <unistd.h>
 filemodel::filemodel():
-    startmatchTimer(new QTimer(this)),
     cmd(new QProcess(this)),
     fileutils(new FileUtils)
 {
 
     header<<tr("File")<<tr("")<<tr("");
-    startmatchTimer->setSingleShot(true);
-    startmatchTimer->setInterval(10);
-    connect(startmatchTimer,&QTimer::timeout,this,[=](){
-        matching();
-    });
 
 }
 
@@ -110,12 +104,6 @@ void filemodel::matchstart(const QString &source){
             matchesChanged();
             return;
         }
-        startmatchTimer->start();
-}
-
-void filemodel::matching(){
-    sourcetext=QString::fromLocal8Bit("*")+sourcetext+QString::fromLocal8Bit("*");
-    commandsearch();
 }
 
 void filemodel::matchesChanged()
@@ -125,30 +113,8 @@ void filemodel::matchesChanged()
         endResetModel();
 }
 
-void filemodel::commandsearch(){
-    if(sourcetext.size()<3)
-        return;
-    struct passwd *pwd;
-    pwd=getpwuid(getuid());
-        QString str =sourcetext;
-        QString name =QString::fromLocal8Bit(pwd->pw_name)+QString::fromLocal8Bit("/ -name ");
-        QString command=QString::fromLocal8Bit("find /home/")+name+str;
-        cmd->setReadChannel(QProcess::StandardOutput);
-        cmd->start(command);
-        cmd->startDetached(cmd->program());
-        cmd->waitForFinished();
-
-        connect(cmd,&QProcess::readyReadStandardOutput,this,[=](){
-            QString result=QString::fromLocal8Bit(cmd->readAllStandardOutput());
-            if(!result.isEmpty()){
-                showResult(result);
-            }
-        });
-        cmd->close();
-}
-
-void filemodel::showResult(QString result){
-    pathresult=result.split(QString::fromLocal8Bit("\n"));
+void filemodel::showResult(QStringList result){
+    pathresult=result;
      for(int i=0;i<pathresult.count();i++)
      {
          QList<QString> str1=pathresult.at(i).split(QString::fromLocal8Bit("/"));
