@@ -106,8 +106,10 @@ void MainViewWidget::changesize()
     }
 
     if(appNum == 0){
+        labelSearch->setVisible(false);
         m_searchResultWid->setVisible(false);
     }else {
+        labelSearch->setVisible(true);
         m_searchResultWid->setVisible(true);
     }
 
@@ -367,6 +369,7 @@ void MainViewWidget::initSearchWidget()
 
     search_web_page = new websearch;
     search_web_page->setVisible(false);
+
     connect(search_web_page,&QPushButton::clicked,this,[=](){
            QString str = QString::fromLocal8Bit("https://www.baidu.com/baidu?tn=ubuntuu_cb&ie=utf-8&wd=").append(search1);
            QProcess p;
@@ -376,8 +379,13 @@ void MainViewWidget::initSearchWidget()
            p.waitForFinished(-1);
        });
 
+    labelSearch = new QLabel(this);
+    labelSearch->setText("      应用");
+
+
     //初始化文件与设置view为隐藏
     m_searchResultWid=new SearchResultWidget;
+    labelSearch->setVisible(false);
     m_searchResultWid->setVisible(false);
     m_fileview->setVisible(false);
     m_settingview->setVisible(false);
@@ -406,6 +414,7 @@ void MainViewWidget::AddSearchWidget()
     m_settingview->setModel(m_settingmodel);
 
     //添加已经安装的应用界面
+    mainLayout->addWidget(labelSearch);
     mainLayout->addWidget(m_searchResultWid);
 
     //添加文件搜索界面

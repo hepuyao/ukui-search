@@ -106,6 +106,7 @@ private:
     websearch *search_web_page;
 
     QString search1;
+    QLabel *labelSearch;
 
 
 
