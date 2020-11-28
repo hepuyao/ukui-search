@@ -81,9 +81,10 @@ void MainViewWidget::initUi()
 
 
 /**
- * 监听treeview隐藏或显示
+ * @brief MainViewWidget::showOrHide
+ * 监听文件、设置、应用treeview隐藏或显示，判据为fileNum，SettingNum，appNum。
  */
-void MainViewWidget::changesize()
+void MainViewWidget::showOrHide()
 {
     //文件模块
     if(fileNum == 0)
@@ -109,13 +110,13 @@ void MainViewWidget::changesize()
 }
 
 /**
- * 添加顶部控件
+ * 添加顶部控件：m_queryLineEdit编辑栏
  */
 void MainViewWidget::addTopControl()
 {
-    m_topLayout=new UkuiSearchBarHLayout;
+    m_topLayout = new UkuiSearchBarHLayout;
     m_topLayout->setSpacing(0);
-    m_queryLineEdit=new QLineEdit;
+    m_queryLineEdit = new QLineEdit;
     m_topLayout->addWidget(m_queryLineEdit);
     m_topWidget->setLayout(m_topLayout);
 
@@ -129,7 +130,7 @@ void MainViewWidget::addTopControl()
 void MainViewWidget::initQueryLineEdit()
 {
     //搜索框ui
-    m_queryWid=new UKuiSeachBar;
+    m_queryWid = new UKuiSeachBar;
     m_queryWid->setParent(m_queryLineEdit);
 
     //queryWidLayout 搜索图标和文字所在的布局
@@ -139,10 +140,10 @@ void MainViewWidget::initQueryLineEdit()
     QPixmap pixmap/*=loadSvg(QString(":/data/img/mainviewwidget/search.svg"),16)*/;
 
 
-    m_queryIcon=new QLabel;
+    m_queryIcon = new QLabel;
     m_queryIcon->setFixedSize(pixmap.size());
     m_queryIcon->setPixmap(pixmap);
-    m_queryText=new QLabel;
+    m_queryText = new QLabel;
     m_queryText->setText(tr("Search"));
     m_queryText->adjustSize();
     queryWidLayout->addWidget(m_queryIcon);
@@ -154,24 +155,26 @@ void MainViewWidget::initQueryLineEdit()
     m_queryLineEdit->setMaxLength(100);
 
     //点击搜索框的动画效果
-    m_animation= new QPropertyAnimation(m_queryWid,"geometry");
+    m_animation = new QPropertyAnimation(m_queryWid,"geometry");
     m_animation->setDuration(100);
     connect(m_animation,&QPropertyAnimation::finished,this,&MainViewWidget::animationFinishedSlot);
 
-    //跑一个线程执行应用搜索
-    m_searchAppThread=new SearchAppThread;
-    m_searchFileThread=new SearchFileThread;
-    connect(this,&MainViewWidget::sendSearchKeyword,
-            m_searchFileThread,&SearchFileThread::recvSearchKeyword);
+    //跑一个线程执行应用与文件搜索
+    m_searchAppThread  = new SearchAppThread;
+    m_searchFileThread = new SearchFileThread;
 
     connect(this,&MainViewWidget::sendSearchKeyword,
             m_searchAppThread,&SearchAppThread::recvSearchKeyword);
 
+    connect(m_searchAppThread,&SearchAppThread::sendSearchResult,
+            this,&MainViewWidget::recvSearchResult);
+
+    connect(this,&MainViewWidget::sendSearchKeyword,
+            m_searchFileThread,&SearchFileThread::recvSearchKeyword);
+
     connect(m_searchFileThread,&SearchFileThread::sendSearchResult,
             this,&MainViewWidget::recvFileSearchResult);
 
-    connect(m_searchAppThread,&SearchAppThread::sendSearchResult,
-            this,&MainViewWidget::recvSearchResult);
 
 
     //搜索应用
@@ -217,9 +220,9 @@ void MainViewWidget::initQueryLineEdit()
 bool MainViewWidget::eventFilter(QObject *watched, QEvent *event)
 {
 #if 1
-    if(watched==m_queryLineEdit)
+    if(watched == m_queryLineEdit)
     {
-        if(event->type()==QEvent::FocusIn)
+        if(event->type() == QEvent::FocusIn)
         {
             if(!m_queryLineEdit->text().isEmpty())
             {
@@ -239,7 +242,7 @@ bool MainViewWidget::eventFilter(QObject *watched, QEvent *event)
             }
             m_isSearching=true;
         }
-        else if(event->type()==QEvent::FocusOut)
+        else if(event->type() == QEvent::FocusOut)
         {
             m_searchKeyWords.clear();
             if(m_queryLineEdit->text().isEmpty())
@@ -340,13 +343,15 @@ void MainViewWidget::loadMinMainView()
     AddSearchWidget();
 }
 
-//搜索到的界面（包括应用搜索，文件搜索，设置搜索）的初始化
+/**
+ * @brief MainViewWidget::initSearchWidget 搜索到的界面（包括应用搜索，文件搜索，设置搜索）的初始化
+ */
 void MainViewWidget::initSearchWidget()
 {
 
 
     search1 = "";
-    m_fileview =new fileview;
+    m_fileview = new fileview;
     m_settingview = new settingview;
 
     search_web_page = new websearch;
@@ -380,7 +385,10 @@ void MainViewWidget::initSearchWidget()
 
 
 }
-//添加搜索到的界面
+
+/**
+ * @brief MainViewWidget::AddSearchWidget 添加搜索到的界面
+ */
 void MainViewWidget::AddSearchWidget()
 {
     m_fileview->setModel(m_filemodel);
@@ -418,21 +426,34 @@ void MainViewWidget::widgetMakeZero()
     m_queryLineEdit->setTextMargins(0,1,0,1);
 }
 
+
+/**
+ * @brief MainViewWidget::setFileView  获取搜索文件的数量，并依据此数量选择隐藏或显示
+ * @param row 文件数量
+ */
 void MainViewWidget::setFileView(int row)
 {
     fileNum=row;
-    changesize();
+    showOrHide();
 }
 
+/**
+ * @brief MainViewWidget::setSettingView  获取搜索设置的数量，并依据此数量选择隐藏或显示
+ * @param row 设置数量
+ */
 void MainViewWidget::setSettingView(int row)
 {
     SettingNum=row;
-    changesize();
+    showOrHide();
 }
 
+/**
+ * @brief MainViewWidget::setAppView 获取搜索应用的数量，并依据此数量选择隐藏或显示
+ * @param row 应用数量
+ */
 void MainViewWidget::setAppView(int row)
 {
     appNum=row;
-    changesize();
+    showOrHide();
 
 }

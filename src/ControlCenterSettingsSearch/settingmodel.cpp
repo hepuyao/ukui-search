@@ -1,9 +1,11 @@
 #include "settingmodel.h"
 
-
 #define XML_Source QString::fromLocal8Bit("ChineseFunc")
 #define XML_Title  QString::fromLocal8Bit("ChinesePlugin")
 
+/**
+ * @brief settingModel::settingModel 显示设置搜索结果的model
+ */
 settingModel::settingModel():
     startmatchTimer(new QTimer(this))
 {
@@ -25,12 +27,24 @@ settingModel::settingModel():
     XmlElement();
 }
 
+/**
+ * @brief settingModel::rowCount 重写的model行数函数
+ * @param index 条目的索引
+ * @return  model显示的行数
+ */
 int settingModel::rowCount(const QModelIndex& index) const
 {
     return index.isValid() ? 0 : returnresult.count();
 }
 
-//重写设置搜索的model标头
+
+/**
+ * @brief settingModel::headerData 重写的model标头函数
+ * @param section 列
+ * @param orientation 显示方式
+ * @param role 显示内容类型
+ * @return  标头数据
+ */
 QVariant settingModel::headerData(int section,Qt::Orientation orientation ,int role) const {
     if(role == 0){
         return tr("系统设置");
@@ -39,6 +53,12 @@ QVariant settingModel::headerData(int section,Qt::Orientation orientation ,int r
     return QAbstractItemModel::headerData(section,orientation,role);
 }
 
+/**
+ * @brief settingModel::data 每条条目的数据，有显示内容，图片，内容字体字号等
+ * @param index 条目索引
+ * @param role 显示内容的类型
+ * @return  显示内容数据
+ */
 QVariant settingModel::data(const QModelIndex &index, int role) const
 {
     QPixmap map(QString::fromLocal8Bit("/home/li/ukui/ukui-search1/ukui-search/data/img/mainviewwidget/search.png"));
@@ -60,7 +80,10 @@ QVariant settingModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-//运行对应条目的设置
+/**
+ * @brief settingModel::run 运行点击条目对应的文件
+ * @param index 条目运行行数
+ */
 void settingModel::run(int index)
 {
     setting->beginGroup(QString::fromLocal8Bit("control-center"));
@@ -71,7 +94,9 @@ void settingModel::run(int index)
     setting->endGroup();
 }
 
-//按字段解析xml文件，将设置插件的中文提取出来
+/**
+ * @brief settingModel::XmlElement 按字段解析xml文件，将设置插件的中文提取出来
+ */
 void settingModel::XmlElement(){
 
     QFile file(QString::fromLocal8Bit(":/src/ControlCenterSettingsSearch/assets/search.xml"));
@@ -118,7 +143,10 @@ void settingModel::XmlElement(){
     file.close();
 }
 
-//匹配初始化
+/**
+ * @brief settingModel::matchstart 匹配初始化
+ * @param source 输入的字符串
+ */
 void settingModel::matchstart(const QString &source){
 
         sourcetext=source;

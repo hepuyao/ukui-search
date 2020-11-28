@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Style::initWidStyle();
     initUi();
 
+    //可设置应用启动后，其他窗口隐藏
 //    KWindowSystem::setShowingDesktop(!KWindowSystem::showingDesktop());
 }
 

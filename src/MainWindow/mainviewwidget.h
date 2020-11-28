@@ -65,58 +65,43 @@ public:
     void AddSearchWidget();
 
 private:
-    QVBoxLayout* mainLayout;
-    QWidget *m_topWidget=nullptr;
+    QVBoxLayout               * mainLayout;
+    QWidget                   *m_topWidget=nullptr;
+
     //顶部搜索框所在的布局
-    UkuiSearchBarHLayout *m_topLayout=nullptr;
+    UkuiSearchBarHLayout      *m_topLayout=nullptr;
+    QSpacerItem               *m_verticalSpacer=nullptr;
+    QLineEdit                 *m_queryLineEdit=nullptr;
+    UKuiSeachBar              *m_queryWid=nullptr;
+    QLabel                    *m_queryIcon=nullptr;
+    QLabel                    *m_queryText=nullptr;
+    QString                    m_searchKeyWords;
+    QPropertyAnimation        *m_animation=nullptr;
 
-    QSpacerItem *m_verticalSpacer=nullptr;
+    SearchResultWidget        *m_searchResultWid=nullptr;
+    SearchAppThread           *m_searchAppThread=nullptr;
+    SearchFileThread          *m_searchFileThread=nullptr;
 
-    QLineEdit *m_queryLineEdit=nullptr;
-    UKuiSeachBar *m_queryWid=nullptr;
-    QLabel *m_queryIcon=nullptr;
-    QLabel *m_queryText=nullptr;
-    bool m_isSearching;
-    QString m_searchKeyWords;
-    QPropertyAnimation *m_animation=nullptr;
+    int                        m_widgetState=1;//Classification window number
+    int                        m_saveCurrentWidState=-1;//Store the current category window number
+    bool                       m_isSearching;
+    bool                       m_isFullScreen=false;
+    bool                       m_isHiden=false;
 
-    SearchResultWidget *m_searchResultWid=nullptr;
-    SearchAppThread *m_searchAppThread=nullptr;
-    SearchFileThread *m_searchFileThread=nullptr;
+    QSettings                  *m_setting=nullptr;
+    QGSettings                 *m_gsetting=nullptr;
 
-    int m_widgetState=1;//Classification window number
-    int m_saveCurrentWidState=-1;//Store the current category window number
+    fileview                   *m_fileview; //文件view
+    settingview                *m_settingview;//设置view
+    filemodel                  *m_filemodel;//文件model
+    settingModel               *m_settingmodel;//设置model
 
-    bool m_isFullScreen=false;
-    bool m_isHiden=false;
+    int                         appNum; //记录搜索出来的APP数量
+    int                         fileNum; //记录搜索出来的文件数量
+    int                         SettingNum;//记录搜索出来的设置数量
 
-    QSettings *m_setting=nullptr;
-    QGSettings *m_gsetting=nullptr;
-
-    fileview *m_fileview; //文件view
-    settingview *m_settingview;//设置view
-
-    filemodel *m_filemodel;//文件model
-
-    settingModel *m_settingmodel;//设置model
-
-    int appNum; //记录搜索出来的APP数量
-    int fileNum; //记录搜索出来的文件数量
-    int SettingNum;//记录搜索出来的设置数量
-
-    websearch *search_web_page;
-
-    QString search1;
-
-
-
-
-
-
-
-
-
-
+    websearch                   *search_web_page;
+    QString                     search1;
 
 protected:
     /**
@@ -132,7 +117,7 @@ protected:
      */
     void initQueryLineEdit();
 
-    void changesize(); //实现改变文件与设置view大小的方法
+    void showOrHide(); // 隐藏或显示
 
 public Q_SLOTS:
     /**

@@ -27,29 +27,33 @@ SearchResultWidget::SearchResultWidget(QWidget *parent) :
     initUi();
 }
 
+
 SearchResultWidget::~SearchResultWidget()
 {
     delete m_ukuiMenuInterface;
 }
 
+/**
+ * @brief SearchResultWidget::initUi 初始化搜索UI界面
+ */
 void SearchResultWidget::initUi()
 {
     m_listLayout = new QVBoxLayout;
-    applabel = new QLabel;
+    applabel     = new QLabel;
     applabel->setText("应用程序");
     this->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
     this->setAttribute(Qt::WA_StyledBackground,true);
     this->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
     this->setFixedSize(Style::defaultMainViewWidWidth,200);
-//    this->setStyleSheet("background:white;");
-
 
     m_listView=new ListView(this,this->width()-6,this->height()-6,3);
     m_listView->setGeometry(QRect(6,0,this->width()-6,this->height()-6));
     m_listView->show();
 
     m_data.clear();
-    m_listView->addData(m_data);//添加应用数据
+
+    //添加应用数据
+    m_listView->addData(m_data);
     m_ukuiMenuInterface=new UkuiMenuInterface;
 
     connect(m_listView,&ListView::sendItemClickedSignal,this,&SearchResultWidget::execApplication);
@@ -70,6 +74,10 @@ void SearchResultWidget::execApplication(QStringList arg)
     g_object_unref(desktopAppInfo);
 }
 
+/**
+ * @brief SearchResultWidget::updateAppListView 更新应用Listview内容的功能，并实现应用界面刷新高度
+ * @param arg 应用信息字符串
+ */
 void SearchResultWidget::updateAppListView(QVector<QStringList> arg)
 {
     m_data.clear();
@@ -78,6 +86,7 @@ void SearchResultWidget::updateAppListView(QVector<QStringList> arg)
 
     Q_EMIT changeAppNum(m_data.count());
     m_listView->updateData(m_data);
+
     //根据获取的应用数量，刷新界面高度
     if(m_data.size()<=3){
         this->setFixedSize(Style::defaultMainViewWidWidth,m_data.size()*46+46);
