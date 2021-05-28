@@ -36,9 +36,9 @@
     </plugin>
     <plugin name="Area">
         <pinyinPlugin>yuyanyudiqu</pinyinPlugin>
-        <pinyinfunc>quyugeshishuju</pinyinfunc>
+        <pinyinfunc>quyushujugeshi</pinyinfunc>
         <ChinesePlugin>语言与地区</ChinesePlugin>
-        <ChineseFunc>区域格式数据</ChineseFunc>
+        <ChineseFunc>区域数据格式</ChineseFunc>
     </plugin>
     <plugin name="Area">
         <pinyinPlugin>yuyanyudiqu</pinyinPlugin>
@@ -51,12 +51,6 @@
         <pinyinfunc>kaijimorenchengxu</pinyinfunc>
         <ChinesePlugin>开机启动</ChinesePlugin>
         <ChineseFunc>开机默认程序</ChineseFunc>
-    </plugin>
-    <plugin name="Datetime">
-        <pinyinPlugin>shijianyuriqi</pinyinPlugin>
-        <pinyinfunc>tongbuxitongshijian</pinyinfunc>
-        <ChinesePlugin>时间与日期</ChinesePlugin>
-        <ChineseFunc>同步系统时间</ChineseFunc>
     </plugin>
     <plugin name="Datetime">
         <pinyinPlugin>shijianyuriqi</pinyinPlugin>
@@ -126,9 +120,9 @@
     </plugin>
     <plugin name="Fonts">
         <pinyinPlugin>ziti</pinyinPlugin>
-        <pinyinfunc>zitidaxiao</pinyinfunc>
+        <pinyinfunc>cahngguiziti</pinyinfunc>
         <ChinesePlugin>字体</ChinesePlugin>
-        <ChineseFunc>字体大小</ChineseFunc>
+        <ChineseFunc>常规字体</ChineseFunc>
     </plugin>
     <plugin name="Mouse">
         <pinyinPlugin>shubiao</pinyinPlugin>
@@ -234,33 +228,21 @@
     </plugin>
     <plugin name="Proxy">
         <pinyinPlugin>daili</pinyinPlugin>
-        <pinyinfunc>kaiqizidongdaili</pinyinfunc>
+        <pinyinfunc>zidongdaili</pinyinfunc>
         <ChinesePlugin>代理</ChinesePlugin>
-        <ChineseFunc>开启自动代理</ChineseFunc>
+        <ChineseFunc>自动代理</ChineseFunc>
     </plugin>
     <plugin name="Proxy">
         <pinyinPlugin>daili</pinyinPlugin>
-        <pinyinfunc>kaiqishoudongdaili</pinyinfunc>
+        <pinyinfunc>shoudongdaili</pinyinfunc>
         <ChinesePlugin>代理</ChinesePlugin>
-        <ChineseFunc>开启手动代理</ChineseFunc>
+        <ChineseFunc>手动代理</ChineseFunc>
     </plugin>
     <plugin name="Screenlock">
         <pinyinPlugin>suoping</pinyinPlugin>
         <pinyinfunc>suopingshixianshiduxiaoxi</pinyinfunc>
         <ChinesePlugin>锁屏</ChinesePlugin>
         <ChineseFunc>锁屏时显示消息</ChineseFunc>
-    </plugin>
-    <plugin name="Screenlock">
-        <pinyinPlugin>suoping</pinyinPlugin>
-        <pinyinfunc>zidongsuopingshijian</pinyinfunc>
-        <ChinesePlugin>锁屏</ChinesePlugin>
-        <ChineseFunc>自动锁屏时间</ChineseFunc>
-    </plugin>
-    <plugin name="Screenlock">
-        <pinyinPlugin>suoping</pinyinPlugin>
-        <pinyinfunc>suopingbeijing</pinyinfunc>
-        <ChinesePlugin>锁屏</ChinesePlugin>
-        <ChineseFunc>锁屏背景</ChineseFunc>
     </plugin>
     <plugin name="Screensaver">
         <pinyinPlugin>pingbao</pinyinPlugin>
@@ -477,12 +459,6 @@
         <ChinesePlugin>背景</ChinesePlugin>
         <ChineseFunc>排列方式</ChineseFunc>
     </plugin>
-    <plugin name="Wallpaper">
-        <pinyinPlugin>beijing</pinyinPlugin>
-        <pinyinfunc>bizhixuanze</pinyinfunc>
-        <ChinesePlugin>背景</ChinesePlugin>
-        <ChineseFunc>壁纸选择</ChineseFunc>
-    </plugin>
     <plugin name="Display">
         <pinyinPlugin>xianshiqi</pinyinPlugin>
         <pinyinfunc>tongyishuchu</pinyinfunc>
@@ -524,6 +500,12 @@
         <pinyinfunc>lanya</pinyinfunc>
         <ChinesePlugin>蓝牙</ChinesePlugin>
         <ChineseFunc>添加蓝牙</ChineseFunc>
+    </plugin>
+    <plugin name="Pen">
+        <pinyinPlugin>shouxiebi</pinyinPlugin>
+        <pinyinfunc>shouxiebishezhi</pinyinfunc>
+        <ChinesePlugin>手写笔</ChinesePlugin>
+        <ChineseFunc>手写笔设置</ChineseFunc>
     </plugin>
 
 </plugins>

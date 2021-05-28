@@ -106,10 +106,11 @@ void MainViewWidget::initSearchWidget()
     m_fileview    = new SearchFileWidget;
     m_settingview = new SettingWidget;
     search_web_page   = new webwidget;
-    m_searchResultWid = new SearchResultWidget;
-    connect(m_fileview,&SearchFileWidget::fileWidgetHide,m_searchResultWid,[=](){
-        m_searchResultWid->fristSelect();
-        if(m_searchResultWid->isHidden())
+    m_appView =new AppWidget;
+//    m_searchResultWid = new SearchResultWidget;
+    connect(m_fileview,&SearchFileWidget::fileWidgetHide,m_appView,[=](){
+        m_appView->fristSelect();
+        if(m_appView->isHidden())
             m_settingview->fristSelect();
     });
 }
@@ -127,7 +128,8 @@ void MainViewWidget::AddSearchWidget()
     mainLayout->addItem(new QSpacerItem(10,5));
     mainLayout->addWidget(m_fileview);
     mainLayout->addItem(new QSpacerItem(10,5));
-    mainLayout->addWidget(m_searchResultWid);
+//    mainLayout->addWidget(m_searchResultWid);
+    mainLayout->addWidget(m_appView);
     mainLayout->addItem(new QSpacerItem(10,5));
     mainLayout->addWidget(m_settingview);
     mainLayout->addItem(new QSpacerItem(10,5));

@@ -75,9 +75,9 @@ QVariant filemodel::data(const QModelIndex &index, int role) const
         }
     case Qt::TextAlignmentRole:
         if(index.column()==0){
-            return Qt::AlignLeft;
+            return Qt::AlignVCenter;
         }else{
-            return  Qt::AlignRight;
+            return  Qt::AlignCenter;
         }
     case Qt::ToolTipRole:
         if(index.row()<3){
@@ -97,12 +97,12 @@ QVariant filemodel::data(const QModelIndex &index, int role) const
         }
     case Qt::FontRole:
         if(index.column()==0){
-            return QFont("宋体",14,QFont::DemiBold);
+            return QFont("宋体",12,QFont::Medium);
         }else{
             return QFont("宋体",10,QFont::Normal);
         }
     case Qt::SizeHintRole:
-        return QSize(200,46);
+        return QSize(200,48);
     case Qt::TextColorRole:
         if(!index.column()==0){
             return QColor(Qt::gray);
@@ -172,7 +172,7 @@ int filemodel::showResult(QStringList result){
              if(icon.isNull()){
                  icon= QIcon::fromTheme("text-plain");
              }
-             QPixmap pixmap = icon.pixmap(QSize(30,30));
+             QPixmap pixmap = icon.pixmap(QSize(24,24));
              iconresult.append(pixmap);
 
              //添加文件创建时间

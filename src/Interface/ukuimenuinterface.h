@@ -31,8 +31,11 @@ class UkuiMenuInterface
 {
 private:
     QStringList filePathList;
+    QStringList m_blackPathList;
 //    QStringList androidDesktopfnList;
     QSettings* setting=nullptr;
+    QSettings* m_blacksetting=nullptr;
+    QStringList m_blacklist;
 
 protected:
     void recursiveSearchFile(const QString& _filePath);//遍历/usr/share/applications/文件夹
@@ -48,6 +51,7 @@ public:
     static QVector<QStringList> functionalVector;
     static QVector<QString> allAppVector;
     static QStringList androidDesktopfnList;
+    static QStringList blackPathList;
 
     /**
      * 获取系统应用名称

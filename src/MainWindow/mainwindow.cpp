@@ -64,12 +64,6 @@ MainWindow::MainWindow(QWidget *parent) :
     if(QGSettings::isSchemaInstalled(panelmodel_id)){
         gsetting = new QGSettings(panelmodel_id);
     }
-
-    m_ukuiMenuInterface=new UkuiMenuInterface;
-    UkuiMenuInterface::appInfoVector=m_ukuiMenuInterface->createAppInfoVector();
-    UkuiMenuInterface::alphabeticVector=m_ukuiMenuInterface->getAlphabeticClassification();
-    UkuiMenuInterface::functionalVector=m_ukuiMenuInterface->getFunctionalClassification();
-    UkuiMenuInterface::allAppVector=m_ukuiMenuInterface->getAllApp();
     Style::initWidStyle();
     initUi();
     const QByteArray position(POSITION_SETTINGS);
@@ -91,7 +85,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete m_ukuiMenuInterface;
+
 }
 
 /**

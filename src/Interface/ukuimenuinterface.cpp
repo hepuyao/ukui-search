@@ -28,7 +28,12 @@
 UkuiMenuInterface::UkuiMenuInterface()
 {
     QString path=QDir::homePath()+"/.config/ukui/ukui-menu.ini";
+    QString blackpath=QDir::homePath()+"/.cache/ukui-menu/ukui-menu.ini";
     setting=new QSettings(path,QSettings::IniFormat);
+    m_blacksetting=new QSettings(blackpath,QSettings::IniFormat);
+    m_blacksetting->beginGroup("application");
+    m_blacklist=m_blacksetting->allKeys();
+    m_blacksetting->endGroup();
 }
 
 QVector<QStringList> UkuiMenuInterface::appInfoVector=QVector<QStringList>();
@@ -37,6 +42,7 @@ QVector<QStringList> UkuiMenuInterface::alphabeticVector=QVector<QStringList>();
 QVector<QStringList> UkuiMenuInterface::functionalVector=QVector<QStringList>();
 QVector<QString> UkuiMenuInterface::allAppVector=QVector<QString>();
 QStringList UkuiMenuInterface::androidDesktopfnList=QStringList();
+QStringList UkuiMenuInterface::blackPathList=QStringList();
 
 UkuiMenuInterface::~UkuiMenuInterface()
 {
@@ -114,6 +120,7 @@ void UkuiMenuInterface::recursiveSearchFile(const QString& _filePath)
                     continue;
                 }
             }
+
             //过滤中英文名为空的情况
             QLocale cn;
             QString language=cn.languageToString(cn.language());
@@ -136,6 +143,13 @@ void UkuiMenuInterface::recursiveSearchFile(const QString& _filePath)
                 }
             }
 
+            char* exec=g_key_file_get_string(keyfile,"Desktop Entry","Exec", nullptr);
+            QString desktop=QString::fromLocal8Bit(exec);
+            m_blacksetting->beginGroup("application");
+            if(m_blacksetting->contains(desktop.toLocal8Bit().data())){
+                m_blackPathList.append(filePathStr);
+            }
+            m_blacksetting->endGroup();
             filePathList.append(filePathStr);
         }
         i++;
@@ -152,7 +166,7 @@ QStringList UkuiMenuInterface::getDesktopFilePath()
     filePathList.clear();
     getAndroidApp();
     recursiveSearchFile("/usr/share/applications/");
-
+    blackPathList=m_blackPathList;
     filePathList.removeAll("/usr/share/applications/software-properties-livepatch.desktop");
     filePathList.removeAll("/usr/share/applications/mate-color-select.desktop");
     filePathList.removeAll("/usr/share/applications/blueman-adapters.desktop");
@@ -197,6 +211,7 @@ QStringList UkuiMenuInterface::getDesktopFilePath()
     filePathList.removeAll("/usr/share/applications/kylin-io-monitor.desktop");
     filePathList.removeAll("/usr/share/applications/wps-office-uninstall.desktop");
     filePathList.removeAll("/usr/share/applications/wps-office-misc.desktop");
+    filePathList.removeAll("/usr/share/applications/wps-office-prometheus.desktop");
 
     return filePathList;
 }

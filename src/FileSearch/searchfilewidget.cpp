@@ -29,8 +29,8 @@ void SearchFileWidget::initFilesearchUI()
     m_filemodel = new filemodel;
     fileView->setModel(m_filemodel);
 
-    fileView->setColumnWidth(0,300);
-    fileView->setColumnWidth(1,150);
+    fileView->setColumnWidth(0,200);
+    fileView->setColumnWidth(1,310);
     fileView->setColumnWidth(2,150);
 
     connect(m_Morebutton,&MoreButton::clicked,this,[=](){
@@ -85,10 +85,10 @@ void SearchFileWidget::recvFileSearchResult(QStringList arg)
     int count=m_filemodel->showResult(arg);
     m_searchFileThread->quit();
     if(count>2){
-        this->setFixedHeight(m_fileHead->height()+(count+1.6)*46);
+        this->setFixedHeight(m_fileHead->height()+(count+1.6)*48);
         m_Morebutton->show();
     }else{
-        this->setFixedHeight(m_fileHead->height()+(count+1)*46);
+        this->setFixedHeight(m_fileHead->height()+(count+1)*48);
         m_Morebutton->hide();
     }
 

@@ -1,3 +1,39 @@
+ukui-search (3.0.1-1+0528) v101; urgency=medium
+
+  *BUG号：57868
+  *需求号：无
+  *其他改动说明：修改了点击搜索应用结果更多按钮点击打开控制面板
+
+ -- sunfengsheng <sunfengsheng@kylinos.cn>  Fri, 28 May 2021 11:25:31 +0800
+
+ukui-search (3.0.1-1+0428) v101; urgency=medium
+
+  * fix:打开全局搜索后，灰色提示文字“全局搜索”字样下方显示不全
+
+ -- sunfengsheng <sunfengsheng@kylinos.cn>  Mon, 26 Apr 2021 15:14:13 +0800
+
+ukui-search (3.0.1-1+0408) v101; urgency=medium
+
+  * fix:解决管控不全问题
+
+ -- sunfengsheng <sunfengsheng@kylinos.cn>  Thu, 08 Apr 2021 09:31:13 +0800
+
+ukui-search (3.0.1-1+0329) v101; urgency=medium
+
+  * add:增加管控功能
+
+ -- sunfengsheng <sunfengsheng@kylinos.cn> Mon, 29 Mar 2021 11:01:51 +0800
+
+ukui-search (3.0.1-1+0322) v101; urgency=medium
+
+  * fix:搜索文件名含有空格的文件，搜到后点击该文件条目发现打不开文件
+  * fix:全局搜索的使用首字母模糊搜索功能没有应用到系统设置模块
+  * fix:打开全局搜索后，顶部搜索框没有蓝色聚焦描边，与UI设计不符
+  * fix:搜索任意内容后，点击使用百度搜索条目后无法选中它，也没有蓝色高亮 
+  * fix:添加软键盘
+
+ -- sunfengsheng <sunfengsheng@kylinos.cn>  Mon, 22 Mar 2021 16:24:59 +0800
+
 ukui-search (3.0.1-1+0317) v101; urgency=medium
 
   * fix:打开全局搜索后，可以从毛玻璃页面较明显地看到桌面图标轮廓

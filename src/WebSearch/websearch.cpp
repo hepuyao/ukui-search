@@ -4,7 +4,7 @@
 
 webwidget::webwidget(){
     this->setVisible(false);
-    this->setFixedHeight(50);
+    this->setFixedHeight(55);
     websearch *web=new websearch(this);
     QHBoxLayout *buttonLayout=new QHBoxLayout(this);
     buttonLayout->addWidget(web);
@@ -37,7 +37,7 @@ websearch::websearch(QWidget *parent)
 {
     this->setAttribute(Qt::WA_TranslucentBackground);
     this->setParent(parent);
-    this->setFixedHeight(35);
+    this->setFixedHeight(40);
     this->setVisible(false);
     searchString = "请使用百度搜索：";
     search = "";
@@ -77,7 +77,8 @@ websearch::websearch(QWidget *parent)
  */
 void websearch::webSearchTextRefresh(QString mSearchText)
 {
-    searchString=QString::fromLocal8Bit("   使用百度搜索").append(QString::fromLocal8Bit(" ")).append(QString::fromLocal8Bit("\"")).append(mSearchText).append(QString::fromLocal8Bit("\""));
+    searchString=QString::fromLocal8Bit("   使用百度搜索").append(QString::fromLocal8Bit(" ")).append(QString::fromLocal8Bit("“")).append(QString(mSearchText)).append(QString::fromLocal8Bit("”"));
+    m_buttonText->setTextFormat(Qt::PlainText);
     if(mSearchText == ""){
         search=mSearchText;
         this->setVisible(false);

@@ -2,6 +2,7 @@
 #include "src/Style/style.h"
 #include<sys/types.h>
 #include<unistd.h>
+#include <QPalette>
 
 #define PANELMODEL_SETTINGS      "org.ukui.SettingsDaemon.plugins.tablet-mode"
 #define PANEL_MODEL              "tablet-mode"
@@ -165,7 +166,13 @@ UKuiSearchLineEdit::UKuiSearchLineEdit():
     this->addAction(searchAction,QLineEdit::LeadingPosition);
 
     editLabel=new QLabel(tr("Search"));
-    editLabel->setStyleSheet("background:transparent;color:#626c6e;");
+    QFont font=QFont("宋体",15,QFont::Normal);
+    QPalette pe;
+    pe.setColor(QPalette::Text,Qt::lightGray);
+    editLabel->setPalette(pe);
+    editLabel->setFont(font);
+    editLabel->setFixedHeight(this->height()-13);
+//    editLabel->setStyleSheet("background:transparent;color:#626c6e;");
     QHBoxLayout *editLayout=new QHBoxLayout(this);
     editLayout->addSpacing(20);
     editLayout->addWidget(editLabel,0,Qt::AlignLeft);

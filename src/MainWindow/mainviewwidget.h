@@ -37,15 +37,18 @@
 #include "src/Style/style.h"
 #include "src/FileSearch/filemodel.h"
 #include "src/ControlCenterSettingsSearch/settingmodel.h"
+#include "src/AppSearch/appmodel.h"
 #include <QTreeView>
 #include "../WebSearch/websearch.h"
 #include "../FileSearch/fileview.h"
 #include "../ControlCenterSettingsSearch/settingview.h"
+#include "../AppSearch/appview.h"
 #include "src/SearchBar/inputbox.h"
 #include <QVBoxLayout>
 #include <QHeaderView>
 #include "../FileSearch/searchfilewidget.h"
 #include "../ControlCenterSettingsSearch/settingwidget.h"
+#include "../AppSearch/appwidget.h"
 class MainViewWidget : public QWidget
 {
     Q_OBJECT
@@ -82,6 +85,8 @@ private:
 
     SearchFileWidget *m_fileview; //文件view
     SettingWidget *m_settingview; //设置view
+    AppWidget *m_appView;
+
 
     filemodel *m_filemodel;       //文件model
 

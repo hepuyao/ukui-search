@@ -2,6 +2,14 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="tr_TR">
 <context>
+    <name>AppWidget</name>
+    <message>
+        <location filename="../src/AppSearch/appwidget.cpp" line="15"/>
+        <source>App</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ListView</name>
     <message>
         <location filename="../src/UtilityFunction/listview.cpp" line="37"/>
@@ -12,17 +20,17 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/MainWindow/main.cpp" line="62"/>
+        <location filename="../src/MainWindow/main.cpp" line="91"/>
         <source>ukui-search is already running!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/MainWindow/main.cpp" line="66"/>
+        <location filename="../src/MainWindow/main.cpp" line="95"/>
         <source>Display debug information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/MainWindow/main.cpp" line="67"/>
+        <location filename="../src/MainWindow/main.cpp" line="96"/>
         <source>show search widget</source>
         <translation type="unfinished"></translation>
     </message>
@@ -38,7 +46,7 @@
 <context>
     <name>SearchResultWidget</name>
     <message>
-        <location filename="../src/AppSearch/searchresultwidget.cpp" line="40"/>
+        <location filename="../src/AppSearch/searchresultwidget.cpp" line="42"/>
         <source>App</source>
         <translation type="unfinished"></translation>
     </message>
@@ -54,7 +62,7 @@
 <context>
     <name>UKuiSearchLineEdit</name>
     <message>
-        <location filename="../src/SearchBar/inputbox.cpp" line="150"/>
+        <location filename="../src/SearchBar/inputbox.cpp" line="168"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>

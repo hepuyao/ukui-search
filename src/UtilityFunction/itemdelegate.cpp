@@ -37,6 +37,7 @@ ItemDelegate::~ItemDelegate()
 
 void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
+    QStringList blaclist=UkuiMenuInterface::blackPathList;
     QStyle *style = option.widget? option.widget->style() : QApplication::style();
     if(index.isValid())
     {
@@ -88,6 +89,7 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
         {
             style->drawControl(QStyle::CE_ItemViewItem, &option, painter);
         }
+
         painter->setOpacity(1);
 
         if(module>0)
@@ -124,9 +126,26 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
                     }
                 }
                 painter->save();
-                icon.paint(painter,iconRect,Qt::AlignLeft);
+                QIcon icon1;
+                if(blaclist.contains(strlist1.at(0))){
+                QPixmap pixmap1=icon.pixmap(QSize(30,30));
+                QImage image1=pixmap1.toImage();
+                QImage image2 = image1.convertToFormat(QImage::Format_Indexed8);
+                image2.setColorCount(256);
+                for(int i = 0; i < 256; i++)
+                {
+                    image2.setColor(i, qRgb(i, i, i));
+                }
+                QPixmap pixmap=QPixmap::fromImage(image2);
+                icon.addPixmap(pixmap);
+                icon1.addPixmap(pixmap);
+                }else{
+                    icon1=icon;
+                }
+
+                icon1.paint(painter,iconRect,Qt::AlignLeft);
                 QString appname=pUkuiMenuInterface->getAppName(strlist.at(0));
-                painter->setFont(QFont("宋体",14,QFont::DemiBold));
+                    painter->setFont(QFont("宋体",14,QFont::DemiBold));
                 painter->drawText(QRect(iconRect.right()+15,rect.y(),
                                         rect.width()-62,rect.height()),Qt::AlignVCenter,appname);
                 painter->restore();
@@ -188,6 +207,7 @@ void ItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, 
                         icon=QIcon::fromTheme(QString("application-x-desktop"));
                 }
             }
+
             icon.paint(painter,iconRect,Qt::AlignLeft);
             QString appname=pUkuiMenuInterface->getAppName(strlist.at(0));
             QFileInfo fileInfo(strlist.at(0));
